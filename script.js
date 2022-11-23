@@ -69,11 +69,11 @@ function delStr(p) {
     })
 }
 
-function eT(x) {
+function equalsTo(x) {
     x.addEventListener('click', e => {
         disp.innerText = eval(z)
         z = disp.innerText
-        console.log(z);
+        // console.log(z);
     })
 }
 
@@ -173,7 +173,7 @@ displayElement(pi)
 displayElement(euler)
 clrScr(clear)
 delStr(del)
-eT(equals)
+equalsTo(equals)
 inverse(inv)
 sq(square)
 squareRoot(sqRoot)
