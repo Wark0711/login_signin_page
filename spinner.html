@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spinner using HTML & CSS</title>
+    <style>
+        *,
+        *::after,
+        *::before {
+            box-sizing: border-box;
+        }
+
+        .container{
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .spinner {
+            height: 300px;
+            width: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            position: relative;
+            overflow: hidden;
+            animation: text-color 2s ease-in-out infinite alternate;
+        }
+
+        .spin-sec {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            border-radius: 50%;
+            border: 15px solid transparent;
+            mix-blend-mode: overlay;
+            animation: rotate var(--duration) var(--timimg) infinite;
+            pointer-events: none;
+        }
+
+        .spin-sec-r {
+            border-top-color: red;
+            --duration: 1.75s;
+            --timimg: ease-in-out;
+        }
+
+        .spin-sec-y {
+            border-bottom-color: yellow;
+            --duration: 1.2s;
+            --timimg: ease-in-out;
+        }
+
+        .spin-sec-b {
+            border-left-color: blue;
+            --duration: 2.2s;
+            --timimg: ease-in;
+        }
+
+        .spin-sec-g {
+            border-right-color: green;
+            --duration: 2.3s;
+            --timimg: ease-out;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes text-color {
+            0% {
+                color: rgba(0, 0, 0, 1);
+            }
+
+            50% {
+                color: rgba(0, 0, 0, .5);
+            }
+
+            100% {
+                color: rgba(0, 0, 0, .1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="spinner">
+            Loading
+            <div class="spin-sec spin-sec-r"></div>
+            <div class="spin-sec spin-sec-y"></div>
+            <div class="spin-sec spin-sec-b"></div>
+            <div class="spin-sec spin-sec-g"></div>
+        </div>
+    </div>
+</body>
+
+</ht
