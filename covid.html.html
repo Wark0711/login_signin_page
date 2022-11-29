@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Material UI Table</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/@mui/material@latest/umd/material-ui.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <style>
+        h2{
+            text-align: center;
+        }
+        Table{
+            background-color: aliceblue;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Covid-19 Data</h2>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        function App() {
+            const { TableContainer, Table, TableBody, TableHead, TableCell, TableRow, Collapse, Paper, Box, IconButton } = MaterialUI
+            const { useState, useEffect } = React
+            const [data, setData] = useState([])
+            const [open, setOpen] = useState(-1)
+            const states = ['India', 'Andaman & Nicobar', 'Andra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chandigarh', 'Chhattisgarh', 'Delhi', 'DNH and D&D', 'Goa', 'Gujarat', 'Himachal Pradesh', 'Haryana', 'Jharkhand', 'Jammu & Kashmir', 'Karnataka', 'Kerala', 'Ladakh', 'Lakshadweeep', 'Maharashtra', 'Meghalya', 'Manipur', 'Madhya Pradesh', 'Mizoram', 'Nagaland', 'Odisha', 'Punjab', 'Puducherry', 'Rajasthan', 'Sikkim', 'Telangana', 'Tamil Nadu', 'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal']
+
+            useEffect(() => {
+                fetch('https://api.covid19tracker.in/data/static/data.min.json')
+                    .then((res) => res.json())
+                    .then((resp) => {
+                        setData(resp);
+                        console.log(resp)
+                    })
+            }, [])
+
+            return (
+                <div>
+                    <TableContainer component={Paper} >
+                        <Table>
+                            <TableHead>
+                                <TableRow stickyHeader>
+                                    <TableCell>Collapsed?</TableCell>
+                                    <TableCell>States & UT</TableCell>
+                                    <TableCell>Confirmed</TableCell>
+                                    <TableCell>Recovered</TableCell>
+                                    <TableCell>Deaths</TableCell>
+                                    <TableCell>Tested</TableCell>
+                                    <TableCell>Vaccinated(Dose:1)</TableCell>
+                                    <TableCell>Vaccinated(Dose:2)</TableCell>
+                                    <TableCell>Population</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {
+                                    Object.entries(data).map((ele, i) =>
+                                        <React.Fragment>
+                                            <TableRow key={i}>
+                                                <TableCell>
+                                                    <IconButton onClick={() => setOpen(open === i ? -1 : i)}>
+                                                        {open === i ? <span class="material-icons">compress</span> : <span className='material-icons'>expand</span>}
+                                                    </IconButton>
+                                                </TableCell>
+                                                <TableCell>{states[i]}</TableCell>
+                                                <TableCell>{ele[1].total.confirmed}</TableCell>
+                                                <TableCell>{ele[1].total.recovered}</TableCell>
+                                                <TableCell>{ele[1].total.deceased}</TableCell>
+                                                <TableCell>{ele[1].total.tested}</TableCell>
+                                                <TableCell>{ele[1].total.vaccinated1}</TableCell>
+                                                <TableCell>{ele[1].total.vaccinated2}</TableCell>
+                                                <TableCell>{ele[1].meta.population}</TableCell>
+                                            </TableRow>
+                                            <TableRow>
+                                                <TableCell colSpan={9}>
+                                                    <Collapse in={open === i} timeout='auto' unmountonExit>
+                                                        <TableHead>
+                                                            <TableCell>Index</TableCell>
+                                                            <TableCell>Districts</TableCell>
+                                                            <TableCell>Confirmed</TableCell>
+                                                            <TableCell>Recovered</TableCell>
+                                                            <TableCell>Deaths</TableCell>
+                                                            <TableCell>Tested</TableCell>
+                                                            <TableCell>Vaccinated(Dose:1)</TableCell>
+                                                            <TableCell>Vaccinated(Dose:2)</TableCell>
+                                                            <TableCell>Population</TableCell>
+                                                        </TableHead>
+                                                        {
+                                                            ele[1].districts !== undefined ?
+                                                                Object.entries(ele[1].districts).map((dist, ind) =>
+                                                                    <TableBody ket={ind}>
+                                                                        <TableCell>{ind}</TableCell>
+                                                                        <TableCell>{dist[0]}</TableCell>
+                                                                        <TableCell>{dist[1].total.confirmed}</TableCell>
+                                                                        <TableCell>{dist[1].total.recovered}</TableCell>
+                                                                        <TableCell>{dist[1].total.deceased}</TableCell>
+                                                                        <TableCell>{dist[1].total.tested}</TableCell>
+                                                                        <TableCell>{dist[1].total.vaccinated1}</TableCell>
+                                                                        <TableCell>{dist[1].total.vaccinated2}</TableCell>
+                                                                        <TableCell>NA</TableCell>
+                                                                    </TableBody>)
+                                                                : <span>Hello</span>
+                                                        }
+                                                    </Collapse>
+                                                </TableCell>
+                                            </TableRow>
+                                        </React.Fragment>
+                                    )}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </div>
+            )
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(
+            <React.StrictMode>
+                <App />
+            </React.StrictMode>
+        );
+    </script>
+
+</body>
+
+</html>
