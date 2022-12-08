@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part2 of Major Project </title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+    <script crossorigin
+        src="https://cdnjs.cloudflare.com/ajax/libs/react-virtualized/9.22.3/react-virtualized.min.js"></script>
+    <style>
+        body{
+            background-color: blanchedalmond;
+        }
+        h2 {
+            text-align: center;
+        }
+
+        .App {
+            display: flex;
+            justify-content: center;
+        }
+
+        .sBar {
+            height: 15em;
+            width: 25em;
+            margin-left: 5em;
+            background-color: bisque;
+        }
+
+        .sBar2 {
+            display: flex;
+            justify-content: center;
+            margin-top: 1em;
+            /* background-color: bisque; */
+        }
+
+        .sBar3 {
+            display: flex;
+            justify-content: center;
+            /* background-color: bisque; */
+        }
+
+        a {
+            margin: 0 1em;
+            border: 2px solid grey;
+        }
+
+        .sblist {
+            height: 10em;
+            width: 25em;
+            overflow-y: scroll;
+            margin-left: 5em;
+            background-color: bisque;
+        }
+
+        .post1 {
+            height: 10em;
+            width: 25em;
+        }
+
+        .post2 {
+            height: 10em;
+            width: 25em;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Part 2 of Major Project</h2>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        function App() {
+            let List = ReactVirtualized.List;
+
+            let userName = ['Kraig.Dare', 'Shawn.Pfeffer32', 'Domenico.Haley', 'Eloisa50', 'Leora3', 'Harold_Leuschke', 'Clifton.Conn', 'Deondre.Osinski92', 'Kristin.Goyette8', 'Emmett_Russel', 'Clara.West', 'Rosa.Ortiz', 'Annamarie.Hansen91', 'Donna.Graham98', 'Oran.Heaney', 'Mara.Walker4', 'Ernestine.Frami30', 'Carley.Bernhard', 'Lauriane53', 'Alexane36', 'Ettie46', 'Francis_Jacobi', 'Gennaro.Spinka', 'Shanelle_McLaughlin', 'Jamal.Miller', 'Jamil44', 'Albertha.Bashirian45', 'Ellie.Hagenes83', 'Michelle96', 'Aryanna.Kautzer', 'Erna42', 'Hettie_Harris', 'Erica_Kshlerin53', 'Cassandre_McCullough', 'Shawn.Hickle', 'Watson_Connelly', 'Marilie.Kuhn60', 'Weldon59', 'Reanna75', 'Brittany_Crist97']
+
+            let address = ['785 Shanahan Burg', '335 Kertzmann Plaza', '0364 Bradtke Junction', '962 Daugherty Ramp', '5457 MacGyver Prairie', '435 Maritza Hills', "79196 O'Reilly Cove", '993 Bethany Causeway', '63307 Jaskolski Turnpike', '2741 Olson Shoal', '6010 Justina Wall', '637 Novella Springs', '6558 Lacy Roads', '2542 MacGyver Lane', '930 Bruen Locks', '17499 Walter Unions', '300 Lind Gardens', '02648 Beer Pass', '440 Larson Course', '7196 Blick Pike', '05396 Garett Lights', '193 Jaylon Parkway', '50810 Elvie Run', '7938 Pattie Courts', '8836 Anibal Walks', '3688 Gregory Plain', '42478 Vivienne Throughway', '155 Kenyon Route', '9419 Sage Skyway', '45423 Heathcote Land', '1256 Chet Cove', '3678 Hackett Shoal', '2265 Lonie Fields', '40064 Regan Light', '27748 Wiegand Causeway', '994 Dee Squares', '72760 Aditya Meadows', '68678 Barton Land', '81840 Jackeline Street', '545 Davis Manor']
+
+            let contact = ['1-949-259-7301 x334', '795-228-6844', '(218) 395-0117', '1-404-307-8902 x55154', '603-608-5753', '470.914.5451 x843', '1-697-969-7176', '806.778.4633 x785', '759-329-0631', '609-713-4445 x66794', '1-391-824-4944 x82170', '1-559-919-2740', '791-884-0184', '213.820.3821', '303-506-2255', '(448) 596-5523 x3902', '231.328.8607 x592', '465.269.2359', '(453) 912-2864 x1614', '722.687.9630', '1-959-295-4484 x3586', '1-874-937-8735 x87734', '(365) 231-1582 x48087', '(819) 807-6013 x29864', '(324) 393-5616 x630', '290.902.0103 x4077', '363-378-3395 x483', '203-972-7792 x19373', '(832) 706-1917 x788', '1-365-218-9213 x80543', '(398) 819-7141 x00339', '675.937.0120 x041', '(738) 940-3372', '1-680-698-8015 x7271', '246-434-6809 x14370', '(829) 256-0283 x9471', '976-647-8117 x6098', '840-450-2531 x39104', '1-417-393-9534 x994', '469.739.6219']
+
+            let countries = ['Niger', 'Nigeria', 'Bhutan', 'Martinique', 'Lithuania', 'Faroe Islands', 'El Salvador', 'Mali', 'Bouvet Island (Bouvetoya)', 'Albania', 'Virgin Islands, British', 'United Kingdom', 'Haiti', 'Saint Pierre and Miquelon', 'United Arab Emirates', 'Fiji', 'Kenya', 'Zambia', 'Reunion', 'Lesotho', 'Mexico', 'Nepal', 'Syrian Arab Republic', "Lao People's Democratic Republic", 'Guadeloupe', 'Heard Island and McDonald Islands', 'Burundi', 'Indonesia', 'Martinique', 'New Caledonia', 'Faroe Islands', 'Palestinian Territory', 'South Georgia and the South Sandwich Islands', 'Micronesia', 'Hungary', 'Bouvet Island (Bouvetoya)', 'Lithuania', 'Svalbard & Jan Mayen Islands', 'Austria', 'Burkina Faso']
+
+            let carMakers = ['Bugatti', 'Ferrari', 'Chevrolet', 'Nissan', 'Mercedes Benz', 'Dodge', 'Ferrari', 'Toyota', 'Cadillac', 'Bentley', 'Cadillac', 'Land Rover', 'Fiat', 'Volvo', 'Volvo', 'Toyota', 'Aston Martin', 'Aston Martin', 'Rolls Royce', 'Hyundai', 'Aston Martin', 'Kia', 'Fiat', 'Cadillac', 'Aston Martin', 'Bentley', 'Volvo', 'Mazda', 'Fiat', 'Dodge', 'Kia', 'Mazda', 'Honda', 'Mercedes Benz', 'Land Rover', 'Dodge', 'Bugatti', 'Toyota', 'Mercedes Benz', 'Mercedes Benz']
+
+            let carModels = ['A4', 'Camry', 'Fortwo', 'Camaro', 'Fortwo', 'Escalade', '1', 'Explorer', 'Grand Cherokee', 'Camry', 'Spyder', 'Volt', 'ATS', 'Golf', 'Escalade', 'Model S', 'CTS', 'Accord', 'LeBaron', '911', 'CTS', 'Impala', 'Ranchero', 'Silverado', 'F-150', 'Grand Cherokee', 'Beetle', 'Silverado', 'Jetta', 'Model 3', 'Camaro', 'XC90', 'XTS', 'El Camino', 'A8', 'A8', 'Civic', 'Model X', 'Escalade', '911']
+
+            let jobs = ['Legacy Brand Consultant', 'Future Infrastructure Officer', 'Direct Quality Specialist', 'Internal Usability Planner', 'District Markets Associate', 'Legacy Operations Consultant', 'Investor Metrics Supervisor', 'Customer Operations Consultant', 'Internal Integration Architect', 'Customer Assurance Specialist', 'International Identity Manager', 'District Usability Associate', 'International Implementation Administrator', 'Global Directives Consultant', 'Internal Metrics Assistant', 'Corporate Mobility Engineer', 'Human Response Assistant', 'Dynamic Directives Officer', 'National Program Analyst', 'Corporate Infrastructure Designer', 'International Functionality Technician', 'International Communications Producer', 'National Response Supervisor', 'Corporate Functionality Agent', 'Future Interactions Strategist', 'Lead Intranet Supervisor', 'Customer Security Director', 'Internal Assurance Technician', 'Direct Program Director', 'Direct Assurance Designer', 'Human Quality Officer', 'Chief Data Manager', 'Future Accounts Coordinator', 'Legacy Integration Executive', 'National Configuration Officer', 'Customer Mobility Technician', 'District Metrics Planner', 'Lead Applications Planner', 'International Directives Consultant', 'Human Tactics Liaison']
+
+            // let posts1 = [...new Set(carModels)];
+            const { useState, useEffect } = React
+            const [name, setName] = useState('')
+            const [add, setAdd] = useState('')
+            const [coun, setCoun] = useState('')
+            const [ages, setAges] = useState('')
+            const [contacts, setContacts] = useState('')
+            const [job, setJob] = useState('')
+            const [maker, setMaker] = useState('')
+            const [mod, setMod] = useState('')
+            const [carages, setCarAges] = useState('')
+            const [text, setText] = useState('Users using that Car Maker:')
+
+            const [posts1, setPosts1] = useState([...new Set(carMakers)])
+            const [posts2, setPosts2] = useState([...new Set(carModels)])
+            const [currentPage, setCurrentPage] = useState(1)
+            const [postsPerPage, setPostsPerPage] = useState(5)
+            const [currentPage1, setCurrentPage1] = useState(1)
+            const [postsPerPage1, setPostsPerPage1] = useState(5)
+            const indexOfLastPost = currentPage * postsPerPage
+            const indexOfFirstPost = indexOfLastPost - postsPerPage
+            const indexOfLastPost1 = currentPage1 * postsPerPage1
+            const indexOfFirstPost1 = indexOfLastPost1 - postsPerPage1
+            const currentPosts1 = posts1.slice(indexOfFirstPost, indexOfLastPost)
+            const currentPosts2 = posts2.slice(indexOfFirstPost, indexOfLastPost)
+            const [lists1, setLists1] = useState()
+            const [lists2, setLists2] = useState()
+            const [vis1, setVis1] = useState('hidden')
+            const [vis2, setVis2] = useState('hidden')
+            const [vis3, setVis3] = useState('hidden')
+
+            let array = []
+            for (let index = 0; index < 1000; index++) {
+                let obj2 = {}
+                obj2.id = index + 1
+                obj2.userName = userName[[Math.floor(Math.random() * 40)]]
+                obj2.address = address[Math.floor(Math.random() * 40)]
+                obj2.country = countries[Math.floor(Math.random() * 40)];
+                obj2.age = 20 + Math.floor(Math.random() * 71)
+                obj2.phone = contact[Math.floor(Math.random() * 40)]
+                obj2.occupation = jobs[Math.floor(Math.random() * 40)]
+                obj2.carMaker = carMakers[Math.floor(Math.random() * 40)]
+                obj2.carModel = carModels[Math.floor(Math.random() * 40)]
+                obj2.carAge = 1 + Math.floor(Math.random() * 20)
+
+                array.push(obj2)
+            }
+
+            let list = Object.entries(array);
+
+
+            let lis1 = []
+            function Posts1({ title, posts }) {
+                return (
+                    <div className='post1'>
+                        {title}
+                        <ul>
+                            {
+                                posts.map((post, index) =>
+                                    <li onClick={() => {
+                                        list.map((curr, ind) => {
+                                            curr[1].carMaker === post
+                                                ? lis1.push(`ID: ${curr[1].id} UserName: ${curr[1].userName}`)
+                                                : null
+                                            setLists1(lis1)
+                                            setVis2('visible')
+                                        })
+                                    }} key={index}>{post}</li>
+                                )
+                            }
+                        </ul>
+                    </div>
+                )
+            }
+
+            let lis2 = []
+            function Posts2({ title, posts }) {
+                return (
+                    <div className='post2'>
+                        {title}
+                        <ul>
+                            {
+                                posts.map((post, index) =>
+                                    <li onClick={() => {
+                                        list.map((curr, ind) => {
+                                            curr[1].carModel === post
+                                                ? lis2.push(`ID: ${curr[1].id} UserName: ${curr[1].userName}`)
+                                                : null
+                                            setLists2(lis2)
+                                            setVis3('visible')
+                                        })
+                                    }} key={index}>{post}</li>
+                                )
+                            }
+                        </ul>
+                    </div>
+                )
+            }
+
+            const paginate = pageNumbers => setCurrentPage(pageNumbers)
+
+            function Pagination({ postsPerPage, totalPosts, paginate }) {
+                const pageNumbers = []
+                for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
+                    pageNumbers.push(i)
+                }
+                return (
+                    <nav>
+                        <ul>{
+                            pageNumbers.map((e) =>
+                                <span key={e}><a onClick={() => paginate(e)} >{e}</a></span>
+                            )
+                        }
+                        </ul>
+                    </nav>
+                )
+            }
+
+            return (
+                <div>
+                    <div className='App'>
+                        <List
+                            className='List'
+                            width={400}
+                            height={240}
+                            rowCount={array.length}
+                            rowHeight={30}
+                            rowRenderer={
+                                ({ index, isScrolling, key, style }) => (
+                                    <div
+                                        className='Row'
+                                        id={index}
+                                        key={key}
+                                        style={style}
+                                        onClick={() =>
+                                            <div>
+                                                {setVis1('visible')}
+                                                {setName(list[index][1].userName)}
+                                                {setAdd(list[index][1].address)}
+                                                {setCoun(list[index][1].country)}
+                                                {setAges(list[index][1].age)}
+                                                {setContacts(list[index][1].phone)}
+                                                {setJob(list[index][1].occupation)}
+                                                {setMaker(list[index][1].carMaker)}
+                                                {setMod(list[index][1].carModel)}
+                                                {setCarAges(list[index][1].carAge)}
+                                            </div>}
+                                    >
+                                        {`ID:${index + 1} Username: ${list[index][1].userName} Age: ${list[index][1].age}`}
+                                    </div>
+                                )
+                            }
+                        />
+                        <div className='sBar' style={{visibility: vis1}}>
+                            User Details:
+                            <li>Username: {name}</li>
+                            <li>Address: {add}</li>
+                            <li>Country: {coun}</li>
+                            <li>Age: {ages}</li>
+                            <li>Phone: {contacts}</li>
+                            <li>Occupation: {job}</li>
+                            <li>Car Manufacturer: {maker}</li>
+                            <li>Car Model: {mod}</li>
+                            <li>Car Age: {carages}</li>
+                        </div>
+                    </div>
+                    <div className='sBar2'>
+                        <div>
+                            <Posts1 title='Car Makers' posts={currentPosts1} />
+                            <Pagination postsPerPage={postsPerPage} totalPosts={posts1.length} paginate={paginate} />
+                        </div>
+                        <div className='sblist' style={{visibility: vis2}}>
+                            {text}
+                            {
+                                lists1 !== undefined
+                                    ? lists1.map(e =>
+                                        <li>{e}</li>
+                                    )
+                                    : null
+                            }
+                        </div>
+                    </div>
+                    <div class="sBar3">
+                        <div>
+                            <Posts2 title="Car Models" posts={currentPosts2} />
+                            <Pagination postsPerPage={postsPerPage1} totalPosts={posts2.length} paginate={paginate} />
+                        </div>
+                        <div className='sblist' style={{visibility: vis3}}>
+                            Users using that Car model:
+                            {
+                                lists2 !== undefined
+                                    ? lists2.map(e =>
+                                        <li>{e}</li>
+                                    )
+                                    : null
+                            }
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(
+            <React.StrictMode>
+                <App />
+            </React.StrictMode>
+        );
+    </script>
+
+</body>
+
+</html>
