@@ -1,0 +1,76 @@
+#root {
+  max-width: 80em;
+  margin: 0 auto;
+  text-align: center;
+
+}
+
+.navbar {
+  background-color: whitesmoke;
+}
+
+.navbar ul {
+  margin: 0;
+}
+
+h2{
+  background-image: linear-gradient(to right, cyan, darkcyan);
+  border-radius: 1em;
+  margin: 1em auto;
+  width: 75%;
+}
+
+.navbar ul li {
+  display: inline-block;
+  list-style-type: none;
+  margin: 0.5em 2em;
+  padding: .5em;
+  background-image: linear-gradient(to right, cyan, darkcyan);
+  border-radius: .75em;
+}
+
+a {
+  color: black;
+  font-weight: 500;
+  text-decoration: inherit;
+}
+
+.Signin div,
+.Login div,
+.add-prod div,
+.update-pro div {
+  margin: 1.5em 0;
+}
+
+.Signin div input,
+.Login div input,
+.add-prod div input,
+.update-pro div input {
+  margin: 0 .5em;
+  padding: 0.5em;
+  width: 25%;
+  border: .0125em solid black;
+  border-radius: .5em;
+  background-color: lightcyan;
+}
+
+.sign-btn button,
+.log-btn button {
+  width: 20%;
+  margin: 0 .5em;
+  padding: 0.5em;
+  background-image: linear-gradient(to right, cyan, darkcyan);
+  border: .125em solid darkcyan;
+  font-weight: 600;
+  border-radius: 1em;
+}
+
+#span {
+  display: block;
+  margin: -.125em;
+}
+
+span {
+  font-size: .75em;
+  color: red;
+}
